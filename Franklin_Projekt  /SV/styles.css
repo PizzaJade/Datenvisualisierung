@@ -1,0 +1,19 @@
+#countrylist{
+    position: absolute;
+    color: rgb(212, 212, 212);
+    list-style: none;
+    overflow-y: scroll;
+    overflow: hidden;
+    z-index: 999;
+    margin-top: 60px;
+}
+li:hover{
+    cursor: pointer;
+}
+body{
+    display: flex;
+    flex-direction: row;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+
+}
