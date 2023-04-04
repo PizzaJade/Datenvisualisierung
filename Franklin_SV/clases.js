@@ -1,10 +1,8 @@
-
-
 class Clases {
-    constructor ( ){
+    constructor() {
         //this.myCountry = [];
         this.yearsData = [];
-        
+
 
         this.myX = [];
         this.myY = [];
@@ -13,94 +11,111 @@ class Clases {
 
 
 
-        this.overMe = false;
-        this.selected = false;
+        this.overMe = [];
+        this.selected = [];
 
-        this.myWidth =[];
-        this.isOverMe = false;
+        this.myWidth = [];
+        this.isOverMe = [];
+
+        this.offset = {
+            x: width / 2 + 300,
+            y: height / 2
+
+        }
     }
 
-    display (myX, myY) {
-    
-        var x = 1200;
-        var y = 540;
-       noStroke();
-       //fill(this.myColor);
-       ellipse (myX, myY, this.myWidth, -this.mySize);
+    setup() {
+        // this.myCountry = myCountry;
+        for (let agno = 0; agno < this.yearsData.length; agno++) {
+            this.myX[agno] = random(0, width);
+            this.myY[agno] = random(0, height);
+            this.mySize[agno] = random(5, 50);
+            this.myColor[agno] = color(random(0, 255), random(0, 255), random(0, 255));
+            this.overMe[agno] = false;
+            this.selected[agno] = false;
+            this.myWidth[agno] = 0;
+            this.isOverMe[agno] = false;
+        }
+    }
 
 
-       let distance = dist(mouseX,mouseY,this.myX, this.myY);
-       this.isOverMe =  (distance < this.mySize/2);
 
-       noStroke();
-       fill(this.myColor);
-       ellipse (this.myX, this.myY, this.mySize, this.mySize);
+    display(myX, myY) {
 
-      if (this.isOverMe) {
-          fill (200);
-          text(this.myCountry, this.myX, this.myY +15);
-          text("total: " + this.yearsData, this.myX, this.myY + 30);
-      }
+        noStroke();
+
+        this.isThisOverMe();
+
+        for (let agno = 0; agno < this.yearsData.length; agno++) {
+            
+            // fill
+            fill(this.myColor[agno]);
+
+            if (this.isOverMe[agno]) {
+                fill(200);
+                text(this.myCountry,
+                    this.myX[agno] + this.offset.x,
+                    this.myY[agno] + 30 + this.offset.y
+                );
+                text("total: " + this.yearsData,
+                    this.myX[agno] + this.offset.x,
+                    this.myY[agno] + 30 + this.offset.y
+                );
+            }
+
+            ellipse(
+                this.myX[agno] + this.offset.x,
+                this.myY[agno] + this.offset.y,
+                this.mySize[agno], this.mySize[agno]
+            );
+
+            // stroke
+            push();
+            noFill();
+            stroke(255);
+            strokeWeight(2);
+            ellipse(
+                this.myX[agno] + this.offset.x,
+                this.myY[agno] + this.offset.y,
+                this.mySize[agno] + 2, this.mySize[agno] + 2
+            );
+            pop();
+
+
+        }
+
     } // end of display
 
 
 
-    // var x = 1200;
-    // var y = 540;
 
-    otherFunction (){
+    isThisOverMe() {
         let ifAny = false;
-        let x = 1200;
-        let y = 540;
-        
+
         for (let agno = 0; agno < this.yearsData.length; agno++) {
-           
-            let distance = dist(mouseX, mouseY, this.myX[agno], this.myY[agno]);
+            let distance = dist(mouseX - this.offset.x, mouseY - this.offset.y, this.myX[agno], this.myY[agno]);
+
             if (distance < 50) {
-                
-                fill(200);
-                textSize(24);
-                
-                text(" Test",  this.myX[agno]+300, this.myY[agno]+600); // To-Do 
-                // text( this.myName, this.arrayOfpoints[agno].x, this.arrayOfpoints[agno].y-45);
-                // text( this.arrayOfData[agno].x, this.arrayOfpoints[agno].x, this.arrayOfpoints[agno].y-20);
                 ifAny = true;
+            } else {
+                ifAny = false;
             }
+            this.isOverMe[agno] = ifAny;
         }
-        this.overMe = ifAny;
-    }
-
-
-
-    isOverMe () {
-        let ifAny = false;
-        console.log("Testooo");
-        for (let agno = 0; agno < this.yearsData.length; agno++) {
-            let distance = dist(mouseX, mouseY, this.myX[agno], this.myY[agno]);
-            if (distance < 5) {
-                fill(200);
-                textSize(24);
-                text(" Test",  this.myX[agno], this.myY[agno]-70);
-                // text( this.myName, this.arrayOfpoints[agno].x, this.arrayOfpoints[agno].y-45);
-                // text( this.arrayOfData[agno].x, this.arrayOfpoints[agno].x, this.arrayOfpoints[agno].y-20);
-                ifAny = true;
-            }
-        }
-        this.overMe = ifAny;
     };
 
 
 
-    clickOverMe () {
+    clickOverMe() {
         for (let agno = 0; agno < this.myCountry.length; agno++) {
             let distance = dist(mouseX, mouseY, this.myX[agno], this.myY[agno]);
             if (distance < 5) this.selected = !this.selected;
         }
     }
 
-  
 
-}  // end of class
+
+} // end of class
 
 
 
