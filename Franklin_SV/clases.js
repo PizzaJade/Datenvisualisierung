@@ -55,7 +55,7 @@ class Clases {
                 fill(200);
                 text(this.myCountry,
                     this.myX[agno] + this.offset.x,
-                    this.myY[agno] + 30 + this.offset.y
+                    this.myY[agno] + this.offset.y
                 );
                 text("total: " + this.yearsData,
                     this.myX[agno] + this.offset.x,
