@@ -42,13 +42,18 @@ class Clases2 {
     }
 
 
-    display(myXA, myYA) {
+    display(showThisA) {
 
        this.isThisOverMeA();
 
         for (let agnoA = 0; agnoA < this.yearsDataA.length; agnoA++) {
+            if (showThisA) {
+                fill(this.myColorA[agnoA]);
+            } else {
+                noFill();
+            }
             // basic display
-            fill(this.myColorA[agnoA]);
+            // fill(this.myColorA[agnoA]);
              //Füllfarbe von Circle
              noStroke();
              ellipse(

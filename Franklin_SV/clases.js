@@ -42,13 +42,17 @@ class Clases {
     }
 
 
-    display(myX, myY) {
+    display(showThis) {
 
        this.isThisOverMe();
 
         for (let agno = 0; agno < this.yearsData.length; agno++) {
             // basic display
-            fill(this.myColor[agno]);
+            if (showThis) {
+                fill(this.myColor[agno]);
+            } else {
+                noFill();
+            }
              //Füllfarbe von Circle
              noStroke();
              ellipse(

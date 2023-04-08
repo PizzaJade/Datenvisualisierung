@@ -4,7 +4,10 @@ let myCountriesA = [];
 let myYears = ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"];
 let myYearsA = ["2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"];
 
-
+let show = {
+  rape: true,
+  assault: true
+};
 
 function preload() {
   rapeTotalData = loadTable('data/rape_total.csv', 'csv', 'header');
@@ -114,15 +117,21 @@ function draw() {
   //Draw schwarzer Kreis in der Mitte 
   fill ("black");
   ellipse(1250,702,200,200);
+  
+  blendMode(ADD);
 
   // draw all countries
+  // rape
   for (let i = 0; i < 30; i++) {
-    myCountries[i].display();
+    myCountries[i].display(show.rape);
   }
 
+  // assault
   for (let ia = 0; ia < 30; ia++) {
-    myCountriesA[ia].display();
+    myCountriesA[ia].display(show.assault);
   }
+
+  blendMode(BLEND);
 
 } // end draw
 
